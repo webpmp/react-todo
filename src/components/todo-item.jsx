@@ -5,6 +5,7 @@ export default class TodoItem extends React.Component {
     super(props);
     this.state = {id: props.id, text: props.text, isDone: props.isDone};
     this.clickHandler = this.clickHandler.bind(this);
+    this.deleteHandler = this.deleteHandler.bind(this);
   }
 
   clickHandler(e) {
@@ -12,6 +13,13 @@ export default class TodoItem extends React.Component {
       this.setState({isDone: false});
     else
       this.setState({isDone: true});
+  }
+
+  // Note: Delegate the delete operation to the parent as its none of my business
+  //   Following Single Responsibility Priciple.
+  //   Child should be allowed to touch parent's state data.
+  deleteHandler(e) {
+    this.props.deleteHandler(this.state.id)
   }
 
   stateSelector() {
@@ -24,8 +32,11 @@ export default class TodoItem extends React.Component {
   render() {
     console.log('I am executed');
     return (
-        <li onClick={this.clickHandler} className={this.stateSelector()}>
-          {this.props.item.text}
+        <li>
+          <span onClick={this.clickHandler} className={this.stateSelector()}>
+            {this.state.text}
+          </span>
+          <button onClick={this.deleteHandler}>Delete</button>
         </li>
     );
   }
