@@ -1,5 +1,8 @@
 import React from 'react';
 import TodoItem from './todo-item';
+import {Table, Form, FormGroup, FormControl, Button} from 'react-bootstrap';
+
+//--------------------------------------------------------------------------------
 
 export default class TodoList extends React.Component {
 
@@ -28,6 +31,9 @@ export default class TodoList extends React.Component {
     e.preventDefault();
     // todo: need to find a better solution for this; maybe using jQuery
     var textField = e.target.querySelectorAll('[name="new-item"]')[0];
+
+    // Make sure empty objects are skipped
+    if(textField.value.trim() == '') return(textField.focus());
 
     // `setState` updates the state directory/database and notifies the dynamic binding
     // feature of React.js
@@ -77,15 +83,27 @@ export default class TodoList extends React.Component {
 
   render() {
     return (
-        <div>
-          <form onSubmit={this.submitHandler}>
-            <input type="text" name="new-item"/>
-            <input type="submit"/>
-          </form>
+        <div className="col-md-8 margin40top">
+          <Form inline onSubmit={this.submitHandler}>
+            <FormGroup>
+              <FormControl type="text" name="new-item" placeholder="You task description here."/>
+              {' '}
+              <Button type="submit"> Add </Button>
+            </FormGroup>
+          </Form>
 
-          <ul>
+          <Table className="margin10top" striped bordered condensed hover>
+            <thead>
+            <tr>
+              <th>S.N.</th>
+              <th>Task</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
             { this.list()}
-          </ul>
+            </tbody>
+          </Table>
         </div>
     );
   }

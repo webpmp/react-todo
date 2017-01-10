@@ -1,4 +1,5 @@
 import React from 'react';
+import {Button} from 'react-bootstrap';
 
 export default class TodoItem extends React.Component {
   constructor(props) {
@@ -32,12 +33,24 @@ export default class TodoItem extends React.Component {
   render() {
     console.log('I am executed');
     return (
-        <li>
-          <span onClick={this.clickHandler} className={this.stateSelector()}>
-            {this.state.text}
-          </span>
-          <button onClick={this.deleteHandler}>Delete</button>
-        </li>
+        <tr>
+          <td>
+            {this.state.id}
+          </td>
+          <td>
+            <span onClick={this.clickHandler} className={this.stateSelector()}>
+              {this.state.text}
+            </span>
+          </td>
+
+          <td>
+            <Button bsStyle="danger" bsSize="xsmall" onClick={this.deleteHandler}>
+              <i className="fa fa-trash"/>
+              &nbsp;Delete
+            </Button>
+          </td>
+
+        </tr>
     );
   }
 }
