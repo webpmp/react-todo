@@ -3,13 +3,15 @@
 //  ES6 syntax can also be used
 // ------------------------------------------------------
 
-var webpack = require('webpack');
+const webpack = require('webpack');
 
 // The path module provides utilities for working with file
 //  and directory paths. It can be accessed using:
 // See: https://nodejs.org/docs/latest/api/path.html
-var path = require('path');
-console.log('hello----------------');
+const path = require('path');
+
+console.log('----------------');
+
 module.exports = {
   devtool: 'inline-source-map',
   entry: [
